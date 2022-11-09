@@ -1,4 +1,8 @@
+#!/usr/bin/env python3
+# Script for calculating the total duration of videos in a YouTube playlist. Based on Cory Schafer's tutorial
+
 import os
+import sys
 import re
 from datetime import timedelta
 from googleapiclient.discovery import build
@@ -14,10 +18,13 @@ seconds_pattern = re.compile(r'(\d+)S')
 total_seconds = 0
 
 nextPageToken = None
+
+playlist_id = sys.argv[1]
+
 while True:
     pl_request = youtube.playlistItems().list(
         part='contentDetails',
-        playlistId="PL-osiE80TeTsWmV9i9c58mdDCSskIFdDS",
+        playlistId=playlist_id,
         maxResults=50,
         pageToken=nextPageToken
     )
@@ -66,4 +73,6 @@ total_seconds = int(total_seconds)
 minutes, seconds = divmod(total_seconds, 60)
 hours, minutes = divmod(minutes, 60)
 
-print(hours, minutes, seconds)
+print(f"{hours} hr, {minutes} min, {seconds} sec")
+
+
