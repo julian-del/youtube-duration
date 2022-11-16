@@ -74,5 +74,3 @@ minutes, seconds = divmod(total_seconds, 60)
 hours, minutes = divmod(minutes, 60)
 
 print(f"{hours} hr, {minutes} min, {seconds} sec")
-
-
